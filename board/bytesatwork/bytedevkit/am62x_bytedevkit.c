@@ -18,6 +18,8 @@
 #include <net.h>
 #include <cpu_func.h>
 
+#include "../baw_config/baw_config_eeprom.h"
+
 DECLARE_GLOBAL_DATA_PTR;
 
 int board_init(void)
@@ -117,6 +119,12 @@ void spl_perform_fixups(struct spl_image_info *spl_image)
 #ifdef CONFIG_BOARD_LATE_INIT
 int board_late_init(void)
 {
+	int ret;
+
+	ret = baw_config_eeprom_init();
+	if (ret)
+		printf("Initialize byteENGINE EEPROM failed! (%d)\n", ret);
+
 	return 0;
 }
 #endif
@@ -166,5 +174,7 @@ void spl_board_init(void)
 	       MCU_CTRL_DEVICE_CLKOUT_32K_CTRL);
 
 	enable_caches();
+
+	baw_config_eeprom_init();
 }
 #endif
