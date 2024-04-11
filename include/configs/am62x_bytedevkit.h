@@ -60,11 +60,11 @@
 	"\0" \
 	"update_emmc=echo Writing bootloader to eMMC; " \
 		"mmc dev 0 1; " \
-		"load mmc 1 ${loadaddr} tiboot3.bin; " \
+		"load mmc 1:2 ${loadaddr} tiboot3.bin; " \
 		"mmc write ${loadaddr} 0x0 0x400; " \
-		"load mmc 1 ${loadaddr} tispl.bin; " \
+		"load mmc 1:2 ${loadaddr} tispl.bin; " \
 		"mmc write ${loadaddr} 0x400 0xC00; " \
-		"load mmc 1 ${loadaddr} u-boot.img; " \
+		"load mmc 1:2 ${loadaddr} u-boot.img; " \
 		"mmc write ${loadaddr} 0x1000 0x1000; " \
 		"mmc dev 0 0; " \
 	"\0" \
